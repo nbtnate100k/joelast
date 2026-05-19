@@ -1,0 +1,6 @@
+# Pluxo backend — install on Railway with: pip install -r requirements.txt
+Flask>=3.0,<4
+flask-cors>=4.0
+python-dotenv>=1.0
+gunicorn>=23.0
+python-telegram-bot>=21.6,<23

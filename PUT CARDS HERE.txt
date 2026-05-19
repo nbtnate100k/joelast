@@ -1,0 +1,49 @@
+Put your inventory here (one card per line), then import it from the site:
+
+  Admin panel → Stock document (inventory file) → paste this file or choose it with the file picker → Import stock document.
+
+Shop bases (section headers)
+----------------------------
+  BLACKJACK_BASE      → BLACKJACK🃏
+  MONEYJR_BASE        → MoneyJR Base
+  UHQ_USA_BASE        → UHQ USA 🔥
+  FOREIGN_RICH_FUCKERS_BASE → FOREIGN Rich Fuckers👲
+
+Format examples (primary — one card per line)
+---------------------------------------------
+  PAN|MM|YY|CVV|Name|Street|City|State|ZIP|Phone|Email|Brand|Type|Level|Issuer|Country|CC|IP?
+
+  Example:
+  5143772109998915|10|25|805|James Gagnon|19 Kendall Pond Rd apt 202|Derry|NH|03038|+1 859 749 8525|bfoley2448@gmail.com|MASTERCARD|DEBIT|DEBIT MASTERCARD ENHANCED|THE BANCORP BANK NATIONAL ASSOCIATION|UNITED STATES OF AMERICA (THE)|US|24.22.144.215
+
+  IP at the end is optional. Country code (US) is used for the shop flag.
+
+Legacy format (still supported)
+-------------------------------
+  PAN|MM|YY|CVV|Name|Street|City|State|ZIP|Country|Phone|Brand|Type|Level|Issuer|…
+
+Section header on its own line (default section is BLACKJACK_BASE unless PLUXO_DOCUMENT_DEFAULT_BASE is set in .env):
+
+  BLACKJACK_BASE
+  4359830007057259|10|25|123|Ken Morse|1308 Westside Drive|Polk City|IA|50226|US|5152299123|VISA|CREDIT|CLASSIC|U.S. BANK NATIONAL ASSOCIATION ND|UNITED STATES|US
+
+Inline base + tab/spaces + card:
+
+  MONEYJR_BASE	4111111111111111|12|26|123|Name|Street|City|State|90210|US|5551234567
+
+Optional price line at the top (if you don’t set price in the form):
+
+  PRICE 12.50
+
+Telegram large uploads
+----------------------
+  1) /stockbase BLACKJACK_BASE
+  2) /stock 25.00
+  3) Paste lines (Telegram may SPLIT long pastes into several messages — paste every part)
+  4) /done   ← REQUIRED: commits the FULL batch to shop stock
+
+  If you skip /done, only the first chunk may be added. Multi-line /stock pastes
+  are buffered until you send /done.
+
+After import, the server keeps a copy at: data\shop_stock.txt
+Each sale removes the matching line from that file.
